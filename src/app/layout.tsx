@@ -1,16 +1,17 @@
+// app/layout.tsx
+'use client'; // Важно: должен быть самым первым
+
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion'; 
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
 });
 
-export const metadata = {
-  title: 'Мой сайт-портфолио',
-  description: 'Персональное портфолио проектов',
-};
+// Метаданные нужно вынести в отдельный файл или использовать клиентские альтернативы
+// export const metadata = { ... }
 
 export default function RootLayout({
   children,
