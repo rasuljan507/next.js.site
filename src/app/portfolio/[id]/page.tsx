@@ -21,7 +21,14 @@ async function getProject(id: string) {
   return project;
 }
 
-export default async function ProjectPage({ params }: { params: { id: string } }) {
+// Определяем тип пропсов явно, чтобы избежать возможных конфликтов
+type ProjectPageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = await getProject(params.id);
 
   if (!project) {
@@ -32,7 +39,6 @@ export default async function ProjectPage({ params }: { params: { id: string } }
     <main className="container mx-auto px-4 py-16 md:py-24 text-white">
       <h1 className="text-4xl md:text-6xl font-bold mb-12 text-center">{project.title}</h1>
 
-      {/* Главная картинка */}
       <div className="relative w-full h-[60vh] mb-12">
         <Image
           src={urlFor(project.mainImage).url()}
@@ -42,13 +48,11 @@ export default async function ProjectPage({ params }: { params: { id: string } }
         />
       </div>
 
-      {/* Описание проекта */}
       <div className="max-w-3xl mx-auto mb-16">
         <h2 className="text-3xl font-bold mb-4">О проекте</h2>
         <p className="text-gray-400 text-lg whitespace-pre-line">{project.description}</p>
       </div>
 
-      {/* Галерея остальных картинок (ВОЗВРАЩАЕМ ЕЕ НА МЕСТО) */}
       {project.gallery && project.gallery.length > 0 && (
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Галерея</h2>
@@ -67,7 +71,6 @@ export default async function ProjectPage({ params }: { params: { id: string } }
         </div>
       )}
 
-      {/* Кнопки внизу */}
       <div className="mt-16 flex flex-wrap justify-center items-center gap-8">
         {project.liveUrl && (
           <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
