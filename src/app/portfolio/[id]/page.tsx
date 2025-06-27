@@ -1,13 +1,14 @@
 import { client } from "@/lib/sanity.client";
 import { urlFor } from "@/lib/sanity.image";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Project {
   _id: string;
   title: string;
-  mainImage: any;
-  gallery?: any[];
+  mainImage: SanityImageSource;
+  gallery?: SanityImageSource[];
   description: string;
   githubUrl: string;
   liveUrl?: string;
