@@ -15,19 +15,30 @@ interface Project {
 }
 
 async function getProject(id: string) {
-  const query = `*[_type == "project" && _id == $id][0]{
-    ..., // Запрашиваем все поля
-  }`;
-  const project = await client.fetch<Project>(query, { id });
-  return project;
+  try {
+    const query = `*[_type == "project" && _id == $id][0]{
+      _id,
+      title,
+      mainImage,
+      gallery,
+      description,
+      githubUrl,
+      liveUrl
+    }`;
+    const project = await client.fetch<Project>(query, { id });
+    return project;
+  } catch (error) {
+    console.error('Error fetching project:', error);
+    return null;
+  }
 }
 
-// Определяем тип пропсов явно, чтобы избежать возможных конфликтов
-type ProjectPageProps = {
+interface ProjectPageProps {
   params: {
     id: string;
   };
-};
+  searchParams?: Record<string, string | string[] | undefined>;
+}
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = await getProject(params.id);
@@ -46,6 +57,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           alt={`Главное изображение проекта ${project.title}`}
           fill
           className="object-contain"
+          priority
         />
       </div>
 
