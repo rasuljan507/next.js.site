@@ -24,7 +24,7 @@ export default function AboutPage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Ключевые этапы</h2>
         <div className="mt-4 mb-16">
           <Image 
-            src="/rasul-photo.jpg" 
+            src="/rasul-photo.jpg"
             alt="Фото Расула Юсуфалиева"
             width={150}
             height={150}
@@ -32,11 +32,20 @@ export default function AboutPage() {
           />
         </div>
 
-        {/* --- ОБНОВЛЕННЫЙ БЛОК ТАЙМЛАЙНА --- */}
-        <div className="timeline-container max-w-3xl mx-auto">
+        <div className="timeline-container relative max-w-3xl mx-auto">
+          <div className="timeline-line absolute left-1/2 top-0 h-full w-0.5 bg-gray-700"></div>
+
           {timelineData.map((item, index) => (
-            <div key={index} className="timeline-item">
-              <div className="timeline-content rounded-lg bg-gray-800/50 p-6">
+            <div key={index} className="timeline-item relative mb-12">
+              {/* Точка на линии */}
+              <div className="timeline-dot absolute left-1/2 top-1.5 -ml-3 w-6 h-6 rounded-full bg-orange-500 border-4 border-[#1A1D23]"></div>
+              
+              {/* Контент, который меняет положение */}
+              <div 
+                className={`timeline-content md:w-5/12 
+                  ${index % 2 === 0 ? 'md:ml-auto md:pl-12 text-left' : 'md:mr-auto md:pr-12 text-right'}`
+                }
+              >
                 <h3 className="font-bold text-xl mb-1">{item.title}</h3>
                 <p className="text-gray-400">{item.description}</p>
               </div>
