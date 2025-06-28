@@ -4,6 +4,12 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import React from "react";
+
+import TelegramIcon from "@/components/TelegramIcon";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import VKIcon from "@/components/VKIcon";
+import InstaIcon from "@/components/InstaIcon";
 
 interface Project {
   _id: string;
@@ -11,8 +17,9 @@ interface Project {
   mainImage: SanityImageSource;
   gallery?: SanityImageSource[];
   description: string;
-  githubUrl: string;
-  liveUrl?: string;
+  githubUrl?: string;
+  liveUrl?: string;  
+  serviceUrl: string;  
 }
 
 async function getProject(id: string): Promise<Project> {
@@ -23,7 +30,8 @@ async function getProject(id: string): Promise<Project> {
       gallery,
       description,
       githubUrl,
-      liveUrl
+      liveUrl,
+      serviceUrl
     }`;
 
     const project = await client.fetch<Project | null>(query, { id });
@@ -38,10 +46,9 @@ type Props = {
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-export default async function ProjectPage({ params, searchParams }: Props) {
+export default async function ProjectPage({ params }: Props) {
   const { id } = params;
   const project = await getProject(id);
-
 
   return (
     <main className="container mx-auto px-4 py-16 md:py-24 text-white">
@@ -80,6 +87,7 @@ export default async function ProjectPage({ params, searchParams }: Props) {
         </div>
       )}
       
+      {/* --- ИЗМЕНЕНИЕ 2: Обновляем логику отображения кнопок --- */}
       <div className="mt-16 flex flex-wrap justify-center items-center gap-8">
         {project.liveUrl && (
           <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -88,11 +96,35 @@ export default async function ProjectPage({ params, searchParams }: Props) {
             </span>
           </Link>
         )}
-        <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-          <span className="inline-block bg-[#F95738] text-white py-3 px-8 rounded-lg hover:bg-opacity-90 cursor-pointer text-lg font-semibold">
-            Код на GitHub
+        
+        {project.githubUrl && (
+          <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+            <span className="inline-block bg-[#F95738] text-white py-3 px-8 rounded-lg hover:bg-opacity-90 cursor-pointer text-lg font-semibold">
+              Код на GitHub
+            </span>
+          </Link>
+        )}
+
+        <Link href={project.serviceUrl} target="_blank" rel="noopener noreferrer">
+          <span className="inline-block bg-blue-600 text-white py-3 px-8 rounded-lg hover:bg-blue-700 cursor-pointer text-lg font-semibold transition-colors">
+            Заказать услугу
           </span>
         </Link>
+      </div>
+
+      <div className="flex flex-row justify-center mt-16 pt-8 border-t border-gray-800 gap-6">
+        <a href="https://t.me/rasdev_507" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <TelegramIcon className="w-7 h-7 text-gray-400 hover:text-[#26A5E4] transition-colors" />
+        </a>
+        <a href="https://wa.me/+79048911316" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <WhatsAppIcon className="w-7 h-7 text-gray-400 hover:text-[#25D366] transition-colors" />
+        </a>
+        <a href="https://vk.com/bla_huyova" target="_blank" rel="noopener noreferrer" aria-label="VK">
+          <VKIcon className="w-7 h-7 text-gray-400 hover:text-[#4A76A8] transition-colors" />
+        </a>
+        <a href="https://www.instagram.com/rasuljan507" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <InstaIcon className="w-7 h-7 text-gray-400 hover:text-[#F0007C] transition-colors" />
+        </a>
       </div>
     </main>
   );
