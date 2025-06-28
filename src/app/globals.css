@@ -26,3 +26,39 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.timeline-container {
+  @apply relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-x-12;
+}
+
+.timeline-container::before {
+  content: '';
+  @apply absolute top-0 left-1/2 h-full w-0.5 -translate-x-1/2 bg-gray-700 hidden md:block;
+}
+
+.timeline-item {
+  @apply relative md:pl-0 pl-12 py-4;
+}
+
+.timeline-item::before {
+  content: '';
+  @apply absolute top-0 left-0 md:hidden h-full w-0.5 bg-gray-700;
+}
+
+.timeline-item::after {
+  content: '';
+  @apply absolute top-6 w-4 h-4 rounded-full bg-orange-500 ring-4 ring-[#111111];
+  @apply left-[-6px] md:left-1/2 md:-ml-[8px];
+}
+
+.timeline-item:nth-child(even) {
+  @apply md:col-start-1;
+}
+.timeline-item:nth-child(even) .timeline-content {
+  @apply md:text-right;
+}
+
+.timeline-item:nth-child(odd) {
+  @apply md:col-start-3;
+}
