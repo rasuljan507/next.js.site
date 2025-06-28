@@ -10,9 +10,6 @@ const inter = Inter({
   display: 'swap',
 });
 
-// Метаданные нужно вынести в отдельный файл или использовать клиентские альтернативы
-// export const metadata = { ... }
-
 export default function RootLayout({
   children,
 }: {
