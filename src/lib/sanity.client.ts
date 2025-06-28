@@ -1,13 +1,11 @@
-// Файл: src/lib/sanity.client.ts
-import { createClient } from 'next-sanity'
+import { createClient, type ClientConfig } from 'next-sanity'
 
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
-export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!
-export const apiVersion = '2024-06-27'
+const config: ClientConfig = {
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: '2024-06-27', 
+  useCdn: false,           
+  token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN,
+}
 
-export const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: false,
-})
+export const client = createClient(config)
