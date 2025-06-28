@@ -1,8 +1,9 @@
 import { client } from "@/lib/sanity.client";
 import { urlFor } from "@/lib/sanity.image";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface Project {
   _id: string;
@@ -14,8 +15,7 @@ interface Project {
   liveUrl?: string;
 }
 
-async function getProject(id: string): Promise<Project | null> {
-  try {
+async function getProject(id: string): Promise<Project> {
     const query = `*[_type == "project" && _id == $id][0]{
       _id,
       title,
@@ -25,33 +25,28 @@ async function getProject(id: string): Promise<Project | null> {
       githubUrl,
       liveUrl
     }`;
-    const project = await client.fetch<Project>(query, { id });
+
+    const project = await client.fetch<Project | null>(query, { id });
+    if (!project) {
+        notFound();
+    }
     return project;
-  } catch (error) {
-    console.error('Ошибка при загрузке проекта:', error);
-    return null;
-  }
 }
 
-export async function generateStaticParams() {
-  const query = `*[_type == "project"]{ "id": _id }`;
-  const projects = await client.fetch<{id: string}[]>(query);
-  return projects.map((project) => ({
-    id: project.id,
-  }));
-}
+type Props = {
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
-export default async function ProjectPage({ params }: { params: { id: string } }) {
+export default async function ProjectPage({ params, searchParams }: Props) {
   const { id } = params;
   const project = await getProject(id);
 
-  if (!project) {
-    return <div className="text-white text-center py-24">Проект не найден.</div>;
-  }
 
   return (
     <main className="container mx-auto px-4 py-16 md:py-24 text-white">
       <h1 className="text-4xl md:text-6xl font-bold mb-12 text-center">{project.title}</h1>
+
       <div className="relative w-full h-[60vh] mb-12">
         <Image
           src={urlFor(project.mainImage).url()}
@@ -61,10 +56,12 @@ export default async function ProjectPage({ params }: { params: { id: string } }
           priority
         />
       </div>
+
       <div className="max-w-3xl mx-auto mb-16">
         <h2 className="text-3xl font-bold mb-4">О проекте</h2>
         <p className="text-gray-400 text-lg whitespace-pre-line">{project.description}</p>
       </div>
+
       {project.gallery && project.gallery.length > 0 && (
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Галерея</h2>
@@ -82,6 +79,7 @@ export default async function ProjectPage({ params }: { params: { id: string } }
           </div>
         </div>
       )}
+      
       <div className="mt-16 flex flex-wrap justify-center items-center gap-8">
         {project.liveUrl && (
           <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
