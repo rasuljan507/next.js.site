@@ -24,7 +24,7 @@ export default function AboutPage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Ключевые этапы</h2>
         <div className="mt-4 mb-16">
           <Image 
-            src="/rasul-photo.jpg" // Убедись, что путь к фото верный
+            src="/rasul-photo.jpg" 
             alt="Фото Расула Юсуфалиева"
             width={150}
             height={150}
