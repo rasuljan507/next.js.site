@@ -5,11 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
-
-import TelegramIcon from "@/components/TelegramIcon";
-import WhatsAppIcon from "@/components/WhatsAppIcon";
-import VKIcon from "@/components/VKIcon";
-import InstaIcon from "@/components/InstaIcon";
+import ContactCTA from "@/components/ContactCTA"; 
 
 interface Project {
   _id: string;
@@ -19,10 +15,10 @@ interface Project {
   description: string;
   githubUrl?: string;
   liveUrl?: string;
-  serviceUrl: string;
 }
 
 async function getProject(id: string): Promise<Project> {
+ 
   const query = `*[_type == "project" && _id == $id][0]{
       _id,
       title,
@@ -30,8 +26,7 @@ async function getProject(id: string): Promise<Project> {
       gallery,
       description,
       githubUrl,
-      liveUrl,
-      serviceUrl
+      liveUrl
     }`;
 
   const project = await client.fetch<Project | null>(query, { id });
@@ -47,7 +42,6 @@ type Props = {
 };
 
 export default async function ProjectPage({ params }: Props) {
-  
   const { id } = params;
   const project = await getProject(id);
 
@@ -88,7 +82,7 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       )}
 
-      <div className="mt-16 flex flex-wrap justify-center items-center gap-8">
+      <div className="flex flex-wrap justify-center items-center gap-8">
         {project.liveUrl && (
           <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
             <span className="text-lg text-gray-300 hover:text-white cursor-pointer border border-gray-600 hover:border-white transition-colors px-8 py-3 rounded-lg">
@@ -104,28 +98,9 @@ export default async function ProjectPage({ params }: Props) {
             </span>
           </Link>
         )}
-
-        <Link href={project.serviceUrl} target="_blank" rel="noopener noreferrer">
-          <span className="inline-block bg-blue-600 text-white py-3 px-8 rounded-lg hover:bg-blue-700 cursor-pointer text-lg font-semibold transition-colors">
-            Заказать услугу
-          </span>
-        </Link>
       </div>
+      <ContactCTA />
 
-      <div className="flex flex-row justify-center mt-16 pt-8 border-t border-gray-800 gap-6">
-        <a href="https://t.me/rasdev_507" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-          <TelegramIcon className="w-7 h-7 text-gray-400 hover:text-[#26A5E4] transition-colors" />
-        </a>
-        <a href="https://wa.me/+79048911316" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-          <WhatsAppIcon className="w-7 h-7 text-gray-400 hover:text-[#25D366] transition-colors" />
-        </a>
-        <a href="https://vk.com/bla_huyova" target="_blank" rel="noopener noreferrer" aria-label="VK">
-          <VKIcon className="w-7 h-7 text-gray-400 hover:text-[#4A76A8] transition-colors" />
-        </a>
-        <a href="https://www.instagram.com/rasuljan507" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <InstaIcon className="w-7 h-7 text-gray-400 hover:text-[#F0007C] transition-colors" />
-        </a>
-      </div>
     </main>
   );
 }
