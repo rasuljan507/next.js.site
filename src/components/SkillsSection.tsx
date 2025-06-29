@@ -42,7 +42,7 @@ const SkillsSection = () => {
             </div>
 
             <div className="flex flex-col items-center gap-3 group">
-                <UnityIcon className="w-16 h-16 text-[#C0C0C0] group-hover:scale-110 transition-transform duration-300" />
+                <UnityIcon className="w-16 h-16 text-[#61DAFB] group-hover:scale-110 transition-transform duration-300" />
                 <p className="text-gray-400">Unity</p>
             </div>
 
