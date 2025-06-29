@@ -13,5 +13,5 @@ export const previewClient = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN,
+  token: process.env.SANITY_API_TOKEN,
 });

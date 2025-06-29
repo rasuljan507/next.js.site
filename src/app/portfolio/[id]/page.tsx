@@ -48,12 +48,6 @@ type Props = {
 
 export default async function ProjectPage({ params }: Props) {
   
-  console.log('--- ПРОВЕРКА ПЕРЕМЕННЫХ НА VERCEL ---');
-  console.log('Project ID:', process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
-  console.log('Dataset:', process.env.NEXT_PUBLIC_SANITY_DATASET);
-  console.log('------------------------------------');
-  // -----------------------------------------------------------
-
   const { id } = params;
   const project = await getProject(id);
 

@@ -7,11 +7,6 @@ import AnimatedHero from '@/components/AnimatedHero';
 
 export default function Home() {
   
-  console.log('--- ПРОВЕРКА НА ГЛАВНОЙ СТРАНИЦЕ ---');
-  console.log('Project ID:', process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
-  console.log('------------------------------------');
-  // -----------------------------------------------------------
-
   return (
     <main className="min-h-screen flex items-center justify-center p-4">
       <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto">
