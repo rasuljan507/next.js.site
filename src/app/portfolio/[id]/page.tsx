@@ -5,20 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
-import ContactCTA from "@/components/ContactCTA"; 
+import ContactCTA from "@/components/ContactCTA";
 
 interface Project {
   _id: string;
   title: string;
   mainImage: SanityImageSource;
   gallery?: SanityImageSource[];
+  videoUrl?: string; 
   description: string;
   githubUrl?: string;
   liveUrl?: string;
 }
 
 async function getProject(id: string): Promise<Project> {
- 
+  
   const query = `*[_type == "project" && _id == $id][0]{
       _id,
       title,
@@ -26,7 +27,8 @@ async function getProject(id: string): Promise<Project> {
       gallery,
       description,
       githubUrl,
-      liveUrl
+      liveUrl,
+      "videoUrl": video.asset->url // <-- ДОБАВЛЕНА ЭТА СТРОКА
     }`;
 
   const project = await client.fetch<Project | null>(query, { id });
@@ -38,7 +40,6 @@ async function getProject(id: string): Promise<Project> {
 
 type Props = {
   params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
 };
 
 export default async function ProjectPage({ params }: Props) {
@@ -58,6 +59,24 @@ export default async function ProjectPage({ params }: Props) {
           priority
         />
       </div>
+
+      {/* --- ИЗМЕНЕНИЕ 3: Добавляем блок для отображения видео --- */}
+      {project.videoUrl && (
+        <div className="my-16">
+          <h2 className="text-3xl font-bold text-center mb-8">Видео Демонстрация</h2>
+          <video
+            src={project.videoUrl}
+            controls
+            loop
+            autoPlay
+            muted
+            className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
+          >
+            Ваш браузер не поддерживает видео тег.
+          </video>
+        </div>
+      )}
+      {/* ---------------------------------------------------- */}
 
       <div className="max-w-3xl mx-auto mb-16">
         <h2 className="text-3xl font-bold mb-4">О проекте</h2>
@@ -99,8 +118,8 @@ export default async function ProjectPage({ params }: Props) {
           </Link>
         )}
       </div>
-      <ContactCTA />
 
+      <ContactCTA />
     </main>
   );
 }
