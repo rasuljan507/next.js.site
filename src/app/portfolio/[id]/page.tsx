@@ -12,14 +12,13 @@ interface Project {
   title: string;
   mainImage: SanityImageSource;
   gallery?: SanityImageSource[];
-  videoUrl?: string; 
+  videoUrl?: string;
   description: string;
   githubUrl?: string;
   liveUrl?: string;
 }
 
 async function getProject(id: string): Promise<Project> {
-  
   const query = `*[_type == "project" && _id == $id][0]{
       _id,
       title,
@@ -28,7 +27,7 @@ async function getProject(id: string): Promise<Project> {
       description,
       githubUrl,
       liveUrl,
-      "videoUrl": video.asset->url // <-- ДОБАВЛЕНА ЭТА СТРОКА
+      "videoUrl": video.asset->url
     }`;
 
   const project = await client.fetch<Project | null>(query, { id });
@@ -60,29 +59,12 @@ export default async function ProjectPage({ params }: Props) {
         />
       </div>
 
-      {/* --- ИЗМЕНЕНИЕ 3: Добавляем блок для отображения видео --- */}
-      {project.videoUrl && (
-        <div className="my-16">
-          <h2 className="text-3xl font-bold text-center mb-8">Видео Демонстрация</h2>
-          <video
-            src={project.videoUrl}
-            controls
-            loop
-            autoPlay
-            muted
-            className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
-          >
-            Ваш браузер не поддерживает видео тег.
-          </video>
-        </div>
-      )}
-      {/* ---------------------------------------------------- */}
-
       <div className="max-w-3xl mx-auto mb-16">
         <h2 className="text-3xl font-bold mb-4">О проекте</h2>
         <p className="text-gray-400 text-lg whitespace-pre-line">{project.description}</p>
       </div>
 
+      {/* Сначала идет Галерея */}
       {project.gallery && project.gallery.length > 0 && (
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Галерея</h2>
@@ -101,6 +83,23 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       )}
 
+      {/* А теперь, после Галереи, идет Видео */}
+      {project.videoUrl && (
+        <div className="my-16">
+          <h2 className="text-3xl font-bold text-center mb-8">Видео Демонстрация</h2>
+          <video
+            src={project.videoUrl}
+            controls
+            loop
+            autoPlay
+            muted
+            className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
+          >
+            Ваш браузер не поддерживает видео тег.
+          </video>
+        </div>
+      )}
+      
       <div className="flex flex-wrap justify-center items-center gap-8">
         {project.liveUrl && (
           <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
