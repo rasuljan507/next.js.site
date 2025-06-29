@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { client } from "@/lib/sanity.client";
 import { urlFor } from "@/lib/sanity.image";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -64,7 +66,6 @@ export default async function ProjectPage({ params }: Props) {
         <p className="text-gray-400 text-lg whitespace-pre-line">{project.description}</p>
       </div>
 
-      {/* Сначала идет Галерея */}
       {project.gallery && project.gallery.length > 0 && (
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Галерея</h2>
@@ -83,7 +84,6 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       )}
 
-      {/* А теперь, после Галереи, идет Видео */}
       {project.videoUrl && (
         <div className="my-16">
           <h2 className="text-3xl font-bold text-center mb-8">Видео Демонстрация</h2>
