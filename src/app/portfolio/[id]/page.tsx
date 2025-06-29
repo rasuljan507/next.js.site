@@ -18,12 +18,12 @@ interface Project {
   gallery?: SanityImageSource[];
   description: string;
   githubUrl?: string;
-  liveUrl?: string;  
-  serviceUrl: string;  
+  liveUrl?: string;
+  serviceUrl: string;
 }
 
 async function getProject(id: string): Promise<Project> {
-    const query = `*[_type == "project" && _id == $id][0]{
+  const query = `*[_type == "project" && _id == $id][0]{
       _id,
       title,
       mainImage,
@@ -34,11 +34,11 @@ async function getProject(id: string): Promise<Project> {
       serviceUrl
     }`;
 
-    const project = await client.fetch<Project | null>(query, { id });
-    if (!project) {
-        notFound();
-    }
-    return project;
+  const project = await client.fetch<Project | null>(query, { id });
+  if (!project) {
+    notFound();
+  }
+  return project;
 }
 
 type Props = {
@@ -47,6 +47,13 @@ type Props = {
 };
 
 export default async function ProjectPage({ params }: Props) {
+  
+  console.log('--- ПРОВЕРКА ПЕРЕМЕННЫХ НА VERCEL ---');
+  console.log('Project ID:', process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
+  console.log('Dataset:', process.env.NEXT_PUBLIC_SANITY_DATASET);
+  console.log('------------------------------------');
+  // -----------------------------------------------------------
+
   const { id } = params;
   const project = await getProject(id);
 
@@ -86,8 +93,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </div>
       )}
-      
-      {/* --- ИЗМЕНЕНИЕ 2: Обновляем логику отображения кнопок --- */}
+
       <div className="mt-16 flex flex-wrap justify-center items-center gap-8">
         {project.liveUrl && (
           <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -96,7 +102,7 @@ export default async function ProjectPage({ params }: Props) {
             </span>
           </Link>
         )}
-        
+
         {project.githubUrl && (
           <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
             <span className="inline-block bg-[#F95738] text-white py-3 px-8 rounded-lg hover:bg-opacity-90 cursor-pointer text-lg font-semibold">
