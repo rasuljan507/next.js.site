@@ -371,7 +371,7 @@ const AnimatedHero = (
         {/* --- АНИМАЦИЯ 1: Мерцающие фоновые точки --- */}
         <motion.path
           animate={{ opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 1, ease: "easeInOut", repeat: Infinity, delay: 1 }}
+          transition={{ duration: 1, ease: "easeInOut", repeat: Infinity, delay: 0.1 }}
           d="M842.487,326.6l14.281-8.256V302.938L842.487,311.2Zm0-179.224v15.406l14.281-8.257v-15.4Zm0,115.58,14.281-8.257v-15.4l-14.281,8.256Zm0-31.823,14.281-8.256v-15.4l-14.281,8.256Zm0-31.822,14.281-8.256V175.649l-14.281,8.257Zm-14.632-6.947-14.281,8.257v15.405l14.281-8.256ZM813.574,327.91v15.406l14.281-8.257V319.653Zm14.281-103.723-14.281,8.256v15.406l14.281-8.257Zm0-68.352-14.281,8.256V179.5l14.281-8.257Zm0,100.174-14.281,8.256v15.406l14.281-8.257Zm0,31.822-14.281,8.257v15.4l14.281-8.256Zm14.632,6.947,14.281-8.256V271.116l-14.281,8.256Zm57.826-65.253,14.281-8.256V205.863l-14.281,8.257Zm0,63.645,14.281-8.257V269.508l-14.281,8.256Zm0-31.822,14.281-8.257v-15.4l-14.281,8.256Zm0-63.645,14.281-8.256V174.041L900.312,182.3Zm0-83.757v15.405l14.282-8.256V105.689Zm0,51.935,14.282-8.257v-15.4l-14.282,8.256ZM871.4,246.241l14.281-8.257v-15.4L871.4,230.835Zm0,31.822,14.281-8.257V254.4L871.4,262.657Zm0-132,14.281-8.257v-15.4L871.4,130.661Zm0,163.818,14.281-8.256V286.223L871.4,294.48Zm0-127.289,14.281-8.256V158.934L871.4,167.191Zm0,31.822,14.281-8.256V190.756L871.4,199.013Z"
           transform="translate(-791.74 4.826)"
           fill="url(#Degradado_sin_nombre_101)"
@@ -380,7 +380,7 @@ const AnimatedHero = (
         {/* --- АНИМАЦИЯ 2: Большая платформа --- */}
         <motion.g
           animate={{ y: [-20, 20, -20] }}
-          transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, delay: 2 }}
+          transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, delay: 0.2 }}
         >
           <polygon points="157.062 436.486 18.491 358.372 18.491 362.192 157.062 440.306 416.15 289.111 416.15 285.291 157.062 436.486" fill="url(#Degradado_sin_nombre_139)"/>
         </motion.g>
@@ -388,7 +388,7 @@ const AnimatedHero = (
         {/* --- АНИМАЦИЯ 3: Верхний экран --- */}
         <motion.g
           animate={{ y: [-3, 3, -3] }}
-          transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, delay: 3 }}
+          transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, delay: 0.3 }}
         >
           <polygon points="18.491 358.372 278.336 206.027 416.15 285.291 157.062 436.486 18.491 358.372" opacity="0.57" fill="url(#Degradado_sin_nombre_192)"/>
           <polygon points="41.101 357.622 277.33 219.023 393.539 285.861 157.949 423.491 41.101 357.622" opacity="0.57" fill="url(#Degradado_sin_nombre_192-2)"/>
@@ -403,24 +403,24 @@ const AnimatedHero = (
         </motion.g>
         <motion.g
           animate={{ y: [-10, 10, -10], x: [5, -5, 5] }}
-          transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, delay: 4 }}
+          transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, delay: 0.4 }}
         >
           <path d="M1067.575,232.16c-7.24-4.127-18.83-4.125-25.889,0s-6.911,10.824.329,14.95,18.83,4.125,25.888,0S1074.814,236.286,1067.575,232.16Zm38.656,17.545,24.775,0-.443-20.157-24.775,0a27.149,27.149,0,0,0-2.745-3.707l17.3-10.122-24.993-14.248-17.3,10.122q-3.159-.891-6.453-1.537l-.315-14.307-34.9.007.314,14.307q-3.263.643-6.385,1.54l-17.744-10.115L988.2,215.747l17.744,10.115a25.531,25.531,0,0,0-2.582,3.707l-24.775.005.443,20.157,24.775,0a27.287,27.287,0,0,0,2.745,3.706l-17.3,10.121L1014.24,277.8l17.3-10.122q3.16.891,6.453,1.537l.315,14.307,34.9-.007-.315-14.307q3.263-.644,6.385-1.54l17.744,10.115,24.368-14.258-17.744-10.115A25.618,25.618,0,0,0,1106.231,249.705ZM1078,252.865c-12.494,7.31-33.01,7.315-45.825.009s-13.075-19.153-.581-26.464,33.009-7.314,45.824-.009S1090.491,245.554,1078,252.865Z" transform="translate(-791.74 4.826)" fill="url(#Degradado_sin_nombre_17)"/>
         </motion.g>
 
         {/* --- АНИМАЦИЯ 6, 7, 8: Маленькие летающие UI-карточки --- */}
-        <motion.polygon animate={{y: [-20, 20, -20]}} transition={{duration: 10, ease: "easeInOut", repeat: Infinity, delay: 5}} points="315.26 237.497 339.773 222.855 362.197 236.092 337.808 250.543 315.26 237.497" fill="url(#Degradado_sin_nombre_709-2)"/>
-        <motion.polygon animate={{y: [30, -30, 30]}} transition={{duration: 4, ease: "easeInOut", repeat: Infinity, delay: 6}} points="299.524 239.276 315.394 229.795 329.912 238.366 314.122 247.722 299.524 239.276" fill="url(#Degradado_sin_nombre_17-2)"/>
-        <motion.polygon animate={{y: [-10, 10, -10]}} transition={{duration: 3, ease: "easeInOut", repeat: Infinity, delay: 7}} points="163.551 324.439 179.421 314.959 193.939 323.53 178.149 332.885 163.551 324.439" fill="url(#Degradado_sin_nombre_17-3)"/>
+        <motion.polygon animate={{y: [-20, 20, -20]}} transition={{duration: 10, ease: "easeInOut", repeat: Infinity, delay: 0.5}} points="315.26 237.497 339.773 222.855 362.197 236.092 337.808 250.543 315.26 237.497" fill="url(#Degradado_sin_nombre_709-2)"/>
+        <motion.polygon animate={{y: [30, -30, 30]}} transition={{duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.6}} points="299.524 239.276 315.394 229.795 329.912 238.366 314.122 247.722 299.524 239.276" fill="url(#Degradado_sin_nombre_17-2)"/>
+        <motion.polygon animate={{y: [-10, 10, -10]}} transition={{duration: 3, ease: "easeInOut", repeat: Infinity, delay: 0.7}} points="163.551 324.439 179.421 314.959 193.939 323.53 178.149 332.885 163.551 324.439" fill="url(#Degradado_sin_nombre_17-3)"/>
 
         {/* --- АНИМАЦИЯ 9, 10, 11: Выдвигающиеся столбики --- */}
-        <motion.polygon animate={{y: [8, 16, 8]}} transition={{duration: 1, ease: "easeInOut", repeat: Infinity, delay: 8}} points="149.989 414.43 149.989 424.821 158.731 430.007 158.731 419.488 149.989 414.43" fill="url(#Degradado_sin_nombre_653-7)"/>
-        <motion.polygon animate={{y: [10, 20, 10]}} transition={{duration: 2.5, ease: "easeInOut", repeat: Infinity, delay: 9}} points="145.504 422.219 145.504 428.095 152.846 432.105 152.846 426.11 145.504 422.219" fill="url(#Degradado_sin_nombre_653-7)" />
+        <motion.polygon animate={{y: [8, 16, 8]}} transition={{duration: 1, ease: "easeInOut", repeat: Infinity, delay: 0.8}} points="149.989 414.43 149.989 424.821 158.731 430.007 158.731 419.488 149.989 414.43" fill="url(#Degradado_sin_nombre_653-7)"/>
+        <motion.polygon animate={{y: [10, 20, 10]}} transition={{duration: 2.5, ease: "easeInOut", repeat: Infinity, delay: 0.9}} points="145.504 422.219 145.504 428.095 152.846 432.105 152.846 426.11 145.504 422.219" fill="url(#Degradado_sin_nombre_653-7)" />
         <motion.polygon animate={{y: [0, -6, 0]}} transition={{duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.7}} points="157.509 421.946 157.509 427.822 164.851 431.832 164.851 425.837 157.509 421.946" fill="url(#Degradado_sin_nombre_653-8)" />
         
         {/* --- АНИМАЦИЯ 12, 13, 14: Мерцающие элементы --- */}
-        <motion.polygon animate={{opacity: [10, 4, 10]}} transition={{duration: 1, ease: "easeInOut", repeat: Infinity, delay: 10}} points="343.767 141.207 334.973 146.258 343.767 151.13 352.56 146.258 343.767 141.207" fill="url(#Degradado_sin_nombre_53)"/>
-        <motion.polygon animate={{opacity: [5, 10, 5]}} transition={{duration: 1, ease: "easeInOut", repeat: Infinity, delay: 11}} points="331.741 134.263 322.947 139.314 331.741 144.186 340.534 139.314 331.741 134.263" fill="url(#Degradado_sin_nombre_72)"/>
+        <motion.polygon animate={{opacity: [10, 4, 10]}} transition={{duration: 1, ease: "easeInOut", repeat: Infinity, delay: 1}} points="343.767 141.207 334.973 146.258 343.767 151.13 352.56 146.258 343.767 141.207" fill="url(#Degradado_sin_nombre_53)"/>
+        <motion.polygon animate={{opacity: [5, 10, 5]}} transition={{duration: 1, ease: "easeInOut", repeat: Infinity, delay: 1.1}} points="331.741 134.263 322.947 139.314 331.741 144.186 340.534 139.314 331.741 134.263" fill="url(#Degradado_sin_nombre_72)"/>
         <motion.polygon animate={{opacity: [1, 0.3, 1]}} transition={{duration: 1, ease: "easeInOut", repeat: Infinity}} points="276.175 159.676 273.247 161.358 276.175 162.98 279.103 161.358 276.175 159.676" fill="url(#Degradado_sin_nombre_72-2)"/>     
         
         <path d="M1035.487,290.416a5.723,5.723,0,0,0-5.178,0c-1.412.826-1.383,2.165.065,2.99a5.72,5.72,0,0,0,5.178,0C1036.964,292.58,1036.935,291.241,1035.487,290.416Zm7.731,3.509h4.956l-.089-4.031h-4.955a5.431,5.431,0,0,0-.549-.742l3.46-2.024-5-2.85-3.46,2.024q-.632-.177-1.291-.307l-.063-2.862-6.981,0,.063,2.862q-.652.127-1.277.307l-3.549-2.023-4.874,2.852,3.549,2.023a5.068,5.068,0,0,0-.517.742h-4.955l.089,4.031h4.955a5.485,5.485,0,0,0,.549.741l-3.46,2.024,5,2.85,3.46-2.024q.631.177,1.291.307l.063,2.862,6.981,0-.063-2.861q.653-.129,1.277-.308l3.549,2.023,4.874-2.852-3.549-2.023A4.984,4.984,0,0,0,1043.218,293.925Zm-5.647.632a10.127,10.127,0,0,1-9.165,0c-2.563-1.461-2.615-3.831-.116-5.293a10.127,10.127,0,0,1,9.165,0C1040.018,290.725,1040.07,293.1,1037.571,294.557Z" transform="translate(-791.74 4.826)" fill="url(#Degradado_sin_nombre_36)"/>
