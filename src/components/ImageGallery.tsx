@@ -1,5 +1,3 @@
-// Файл: src/components/ImageGallery.tsx
-
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
@@ -12,14 +10,13 @@ interface ImageGalleryProps {
 }
 
 export default function ImageGallery({ gallery }: ImageGalleryProps) {
-  // Теперь храним не URL, а индекс активной картинки. null = модальное окно закрыто.
+
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
   if (!gallery || gallery.length === 0) {
     return null;
   }
   
-  // --- НОВЫЕ ФУНКЦИИ ДЛЯ НАВИГАЦИИ ---
   const goToPrevious = useCallback(() => {
     if (currentIndex === null) return;
     const isFirstSlide = currentIndex === 0;
