@@ -8,6 +8,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import ContactCTA from "@/components/ContactCTA";
+import ImageGallery from "@/components/ImageGallery";
 
 interface Project {
   _id: string;
@@ -60,29 +61,13 @@ export default async function ProjectPage({ params }: Props) {
           priority
         />
       </div>
-
+      
       <div className="max-w-3xl mx-auto mb-16">
         <h2 className="text-3xl font-bold mb-4">О проекте</h2>
         <p className="text-gray-400 text-lg whitespace-pre-line">{project.description}</p>
       </div>
 
-      {project.gallery && project.gallery.length > 0 && (
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8">Галерея</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {project.gallery.map((image, index) => (
-              <div key={index} className="relative w-full h-64">
-                <Image
-                  src={urlFor(image).url()}
-                  alt={`${project.title} gallery image ${index + 1}`}
-                  fill
-                  className="object-cover rounded-lg"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <ImageGallery gallery={project.gallery} />
 
       {project.videoUrl && (
         <div className="my-16">
